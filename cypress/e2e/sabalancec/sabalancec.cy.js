@@ -21,5 +21,13 @@ describe("Sabalancec", () => {
             // check if nav has signup button
             HomePage.getSignupButton.should('be.visible');
         });
+        it("Footer", () => {
+            // check if title is visible
+            HomePage.getFooterTitle.should('be.visible');
+            // check if contact us is visible
+            HomePage.getContactUs.should('be.visible');
+            // check if terms & conditions is visible
+            HomePage.getTermsAndCond.should('be.visible');
+        });
     });
 });
