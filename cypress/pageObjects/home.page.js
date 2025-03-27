@@ -34,4 +34,7 @@ export class HomePage extends BasePage {
     static get getTermsAndCond(){
         return cy.get('[class="flex items-end justify-around bg-black pt-16 pb-16 text-white"]').contains('Terms & conditions');
     }
+    static get getAccInitials(){
+        return cy.get('[class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 p-6"]').contains('TN');
+    }
 }
