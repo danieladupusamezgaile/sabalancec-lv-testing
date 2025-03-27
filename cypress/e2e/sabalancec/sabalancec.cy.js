@@ -2,6 +2,7 @@ const { HomePage } = require("../../pageObjects/home.page");
 const { SignupPage } = require("../../pageObjects/signup.page");
 const { SigninPage } = require("../../pageObjects/signin.page");
 const { CataloguePage } = require("../../pageObjects/catalogue.page");
+const { AllergensPage } = require("../../pageObjects/allergens.page");
 
 describe("Main page Module", () => {
     context("Main elements", () => {
@@ -119,11 +120,11 @@ describe('Authentication Module', () => {
 });
 
 describe('Product sections Module', () => {
-    context('Catalogue Functionality', () => {
+    context('Catalogue page Functionality', () => {
         beforeEach(() => {
             CataloguePage.visit();
         });
-        it.only("Categories should show products accordingly", () => {
+        it("Categories should show products accordingly", () => {
             // go to catalogue page
             HomePage.getCatalogueButton.click();
             // click fruits, seeds, nuts category drop down
@@ -155,6 +156,26 @@ describe('Product sections Module', () => {
             CataloguePage.getAllCategories.contains('Vegetables').click();
             // check if carrots is visible
             CataloguePage.getProductGrid.contains('Carrots').should('be.visible');
+        });
+    });
+});
+
+describe('Allergens Module', () => {
+    context('Allergens page Functionality', () => {
+        beforeEach(() => {
+            AllergensPage.visit();
+        });
+        it.only("should open selected allergen page with more info", () => {
+            // go to allergens page
+            HomePage.getAllergensButton.click();
+            // click on fish allergen
+            AllergensPage.getFishAllergen.click();
+            // check if title fish is visible
+            AllergensPage.getFishTitle.should('be.visible');
+            // check if allergic reactions info is visible
+            AllergensPage.getReactionsTitle.should('be.visible');
+            // go back to allergens page
+            AllergensPage.getBackBtn.click();
         });
     });
 });
