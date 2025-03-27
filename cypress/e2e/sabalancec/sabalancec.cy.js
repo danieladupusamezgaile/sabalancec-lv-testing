@@ -3,6 +3,7 @@ const { SignupPage } = require("../../pageObjects/signup.page");
 const { SigninPage } = require("../../pageObjects/signin.page");
 const { CataloguePage } = require("../../pageObjects/catalogue.page");
 const { AllergensPage } = require("../../pageObjects/allergens.page");
+const { ContactusPage } = require("../../pageObjects/contactus.page");
 
 describe("Main page Module", () => {
     context("Main elements", () => {
@@ -165,7 +166,7 @@ describe('Allergens Module', () => {
         beforeEach(() => {
             AllergensPage.visit();
         });
-        it.only("should open selected allergen page with more info", () => {
+        it("should open selected allergen page with more info", () => {
             // go to allergens page
             HomePage.getAllergensButton.click();
             // click on fish allergen
@@ -176,6 +177,25 @@ describe('Allergens Module', () => {
             AllergensPage.getReactionsTitle.should('be.visible');
             // go back to allergens page
             AllergensPage.getBackBtn.click();
+        });
+    });
+});
+
+describe('Contact us Module', () => {
+    context('Contact us functionality', () => {
+        beforeEach(() => {
+            ContactusPage.visit();
+        });
+        it.only("contact info should be visible", () => {
+            // go to contact us page
+            HomePage.getContactButton.click();
+
+            // check if contact number is visible
+            ContactusPage.getContactInfo.contains('+371 12345678').should('be.visible');
+            // check if contact email is visible
+            ContactusPage.getContactInfo.contains('epasts@inbox.lv').should('be.visible');
+            // check if address is visible
+            ContactusPage.getContactInfo.contains(' ALUS STREET 5, VALMIERA, VIDZEME, ESTONIA').should('be.visible');
         });
     });
 });
