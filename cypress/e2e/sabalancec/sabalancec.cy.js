@@ -124,6 +124,7 @@ describe('Product sections Module', () => {
     context('Catalogue page Functionality', () => {
         beforeEach(() => {
             CataloguePage.visit();
+            HomePage.getCatalogueButton.click();
         });
         it("Categories should show products accordingly", () => {
             // go to catalogue page
@@ -158,6 +159,18 @@ describe('Product sections Module', () => {
             // check if carrots is visible
             CataloguePage.getProductGrid.contains('Carrots').should('be.visible');
         });
+        it.only("when clicked, should open single product page", () => {
+            // select cashews
+            CataloguePage.getProductGrid.contains('Cashews').click();
+            // check if title cahsews is visible
+            CataloguePage.getProductTitle.contains('Cashews').should('be.visible');
+            // check if price is visible
+            CataloguePage.getProductPrice.contains('€9.99').should('be.visible');
+            // add to cart
+
+            // go back to catalogue
+            CataloguePage.getBackBtn.click();
+        });
     });
 });
 
@@ -186,7 +199,7 @@ describe('Contact us Module', () => {
         beforeEach(() => {
             ContactusPage.visit();
         });
-        it.only("contact info should be visible", () => {
+        it("contact info should be visible", () => {
             // go to contact us page
             HomePage.getContactButton.click();
 
