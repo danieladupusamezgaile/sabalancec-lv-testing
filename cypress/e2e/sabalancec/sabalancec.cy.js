@@ -1,5 +1,6 @@
 const { HomePage } = require("../../pageObjects/home.page");
 const { SignupPage } = require("../../pageObjects/signup.page");
+const { SigninPage } = require("../../pageObjects/signin.page");
 
 describe("Sabalancec", () => {
     context("Test", () => {
@@ -30,7 +31,7 @@ describe("Sabalancec", () => {
             // check if terms & conditions is visible
             HomePage.getTermsAndCond.should('be.visible');
         });
-        it.only("Sign Up", () => {
+        it("Sign Up", () => {
             // click sign up button
             HomePage.getSignupButton.click();
             // check signup with empty inputs
@@ -60,6 +61,42 @@ describe("Sabalancec", () => {
             SignupPage.getPasswordInput.type('Test@password1');
             // click signup button
             SignupPage.getSignupBtn.click();
+        });
+        it.only("Sign In", () => {
+            // click sign up button
+            HomePage.getSignupButton.click();
+            // click sign in tab
+            SigninPage.getSigninTab.click();
+            // check log in with empty inputs
+            SigninPage.getLoginBtn.click();
+            SigninPage.getLoginBtn.should('be.visible');
+
+            // input valid email - test@email.com
+            SigninPage.getEmailInput.type('test@email.com');
+            // input invalid password - 123
+            SigninPage.getPasswordInput.type('123');
+            // click log in btn
+            SigninPage.getLoginBtn.click();
+            // verify that error is shown
+            SigninPage.getErr.should('be.visible');
+
+            // input invalid email - test2@email.com
+            SigninPage.getEmailInput.clear().type('test2@email.com');
+            // input valid password - Test@password1
+            SigninPage.getPasswordInput.clear().type('Test@password1');
+            // click log in btn
+            SigninPage.getLoginBtn.click();
+            // verify that error is shown
+            SigninPage.getErr.should('be.visible');
+
+            // input valid email - test@email.com
+            SigninPage.getEmailInput.clear().type('test@email.com');
+            // input valid password - Test@password1
+            SigninPage.getPasswordInput.clear().type('Test@password1');
+            // click log in btn
+            SigninPage.getLoginBtn.click();
+            // verify that account initials TN are visible
+            HomePage.getAccInitials.should('be.visible');
         });
     });
 });
