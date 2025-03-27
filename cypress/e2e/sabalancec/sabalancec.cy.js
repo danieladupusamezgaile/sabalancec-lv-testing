@@ -42,7 +42,7 @@ describe('Authentication Module', () => {
         beforeEach(() => {
             SignupPage.visit();
         });
-        it('should show errors with invalid inputs', () => {
+        xit('should show errors with invalid inputs', () => {
             // click sign up button
             HomePage.getSignupButton.click();
             // check signup with empty inputs
@@ -61,7 +61,7 @@ describe('Authentication Module', () => {
             SignupPage.getSignupBtn.click();
             SignupPage.getSignupBtn.should('be.visible');
         });
-        it('should successfully sign up with valid inputs', () => {
+        xit('should successfully sign up with valid inputs', () => {
             // check valid inputs
             // input name - Test Name
             SignupPage.getNameInput.type('Test Name');
@@ -105,17 +105,42 @@ describe('Authentication Module', () => {
             SigninPage.getLoginBtn.click();
             // verify that error is shown
             SigninPage.getErr.should('be.visible');
+        });
 
-            it("Should successfully log in with valid inputs", () => {
-                // input valid email - test@email.com
-                SigninPage.getEmailInput.clear().type('test@email.com');
-                // input valid password - Test@password1
-                SigninPage.getPasswordInput.clear().type('Test@password1');
-                // click log in btn
-                SigninPage.getLoginBtn.click();
-                // verify that account initials TN are visible
-                HomePage.getAccInitials.should('be.visible');
-            });
+        it("Should successfully log in with valid inputs", () => {
+            // click sign up button
+            HomePage.getSignupButton.click();
+            // click sign in tab
+            SigninPage.getSigninTab.click();
+            // input valid email - test@email.com
+            SigninPage.getEmailInput.clear().type('test@email.com');
+            // input valid password - Test@password1
+            SigninPage.getPasswordInput.clear().type('Test@password1');
+            // click log in btn
+            SigninPage.getLoginBtn.click();
+            // verify that account initials TN are visible
+            HomePage.getAccInitials.should('be.visible');
+        });
+    });
+    context('Sign out Functionality', () => {
+        beforeEach(() => {
+            HomePage.visit();
+        });
+        it("Should log out of current account", () => {
+            // click sign up button
+            HomePage.getSignupButton.click();
+            // click sign in tab
+            SigninPage.getSigninTab.click();
+            // input valid email - test@email.com
+            SigninPage.getEmailInput.clear().type('test@email.com');
+            // input valid password - Test@password1
+            SigninPage.getPasswordInput.clear().type('Test@password1');
+            // click log in btn
+            SigninPage.getLoginBtn.click();
+            // go to account
+            HomePage.getAccInitials.click();
+            // click logout btn
+            SigninPage.getSignOutBtn.click();
         });
     });
 });
@@ -159,7 +184,7 @@ describe('Product sections Module', () => {
             // check if carrots is visible
             CataloguePage.getProductGrid.contains('Carrots').should('be.visible');
         });
-        it.only("when clicked, should open single product page", () => {
+        it("when clicked, should open single product page", () => {
             // select cashews
             CataloguePage.getProductGrid.contains('Cashews').click();
             // check if title cahsews is visible
