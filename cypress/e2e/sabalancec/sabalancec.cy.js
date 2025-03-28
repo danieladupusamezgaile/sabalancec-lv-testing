@@ -235,5 +235,16 @@ describe('Contact us Module', () => {
             // check if address is visible
             ContactusPage.getContactInfo.contains(' ALUS STREET 5, VALMIERA, VIDZEME, ESTONIA').should('be.visible');
         });
+        it.only("contact form should submit with valid values", () => {
+            // go to contact us page
+            HomePage.getContactButton.click();
+            ContactusPage.getNameInput.type('Test');
+            ContactusPage.getLastNameInput.type('Name');
+            ContactusPage.getEmailInput.type('test@email.com');
+            ContactusPage.getPhoneInput.type('23456789');
+            ContactusPage.getRobbedCheckbox.click();
+            ContactusPage.getMessageInput.type('Message');
+            ContactusPage.getSendBtn.click();
+        });
     });
 });
