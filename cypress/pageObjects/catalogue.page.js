@@ -25,4 +25,10 @@ export class CataloguePage extends BasePage {
     static get getBackBtn(){
         return cy.get('[class="flex gap-3"]');
     }
+    static get getAddBtn(){
+        return cy.get('[class="poppins-bold rounded-full bg-black p-2 px-4 text-xl text-white hover:cursor-pointer hover:bg-gray-800 active:bg-gray-700"]').contains('Add to cart');
+    }
+    static get getCartBtn(){
+        return cy.get('[alt="cart"]');
+    }
 }
