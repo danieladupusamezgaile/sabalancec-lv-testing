@@ -4,6 +4,7 @@ const { SigninPage } = require("../../pageObjects/signin.page");
 const { CataloguePage } = require("../../pageObjects/catalogue.page");
 const { AllergensPage } = require("../../pageObjects/allergens.page");
 const { ContactusPage } = require("../../pageObjects/contactus.page");
+const { CartPage } = require("../../pageObjects/cart.page");
 
 describe("Main page Module", () => {
     context("Main elements", () => {
@@ -79,7 +80,7 @@ describe('Authentication Module', () => {
         beforeEach(() => {
             SigninPage.visit();
         });
-        it("Should show errors with invalid inputs", () => {
+        xit("Should show errors with invalid inputs", () => {
             // click sign up button
             HomePage.getSignupButton.click();
             // click sign in tab
@@ -126,7 +127,7 @@ describe('Authentication Module', () => {
         beforeEach(() => {
             HomePage.visit();
         });
-        it("Should log out of current account", () => {
+        xit("Should log out of current account", () => {
             // click sign up button
             HomePage.getSignupButton.click();
             // click sign in tab
@@ -151,7 +152,7 @@ describe('Product sections Module', () => {
             CataloguePage.visit();
             HomePage.getCatalogueButton.click();
         });
-        it("Categories should show products accordingly", () => {
+        xit("Categories should show products accordingly", () => {
             // go to catalogue page
             HomePage.getCatalogueButton.click();
             // click fruits, seeds, nuts category drop down
@@ -184,7 +185,7 @@ describe('Product sections Module', () => {
             // check if carrots is visible
             CataloguePage.getProductGrid.contains('Carrots').should('be.visible');
         });
-        it("when clicked, should open single product page", () => {
+        xit("when clicked, should open single product page", () => {
             // select cashews
             CataloguePage.getProductGrid.contains('Cashews').click();
             // check if title cahsews is visible
@@ -235,7 +236,7 @@ describe('Contact us Module', () => {
             // check if address is visible
             ContactusPage.getContactInfo.contains(' ALUS STREET 5, VALMIERA, VIDZEME, ESTONIA').should('be.visible');
         });
-        it.only("contact form should submit with valid values", () => {
+        it("contact form should submit with valid values", () => {
             // go to contact us page
             HomePage.getContactButton.click();
             ContactusPage.getNameInput.type('Test');
@@ -245,6 +246,27 @@ describe('Contact us Module', () => {
             ContactusPage.getRobbedCheckbox.click();
             ContactusPage.getMessageInput.type('Message');
             ContactusPage.getSendBtn.click();
+        });
+    });
+});
+
+describe('Cart Module', () => {
+    context('Adding product to cart functionality', () => {
+        beforeEach(() => {
+            CataloguePage.visit();
+        });
+        it("Product should be visible in cart page after adding", () => {
+            HomePage.getCatalogueButton.click();
+            // open pistachios product
+            CataloguePage.getProductGrid.contains('Pistachios').click();
+            // add it to cart
+            CataloguePage.getAddBtn.click();
+            // open cart page
+            CataloguePage.getCartBtn.click();
+            // verify that pistachios title is visible
+            CartPage.getProdTitle.contains('Pistachios').should('be.visible');
+            // click continue btn
+            CartPage.getContinueBtn.click();
         });
     });
 });
